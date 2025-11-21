@@ -1,14 +1,12 @@
-# 使用python的版本
-FROM python:3.8
+FROM python:3.9-slim
 
-# 设置工作目录
 WORKDIR /app
 
-# 讲应用文件复制到工作目录
-COPY . /app
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
 
-# 安装依赖程序
-RUN pip install -r requirements.txt
+COPY . .
 
-# 定义入口
+EXPOSE 5000
+
 CMD ["python", "app.py"]
